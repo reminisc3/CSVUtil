@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1454358815 source:c:\dev\csvreader\src\csvreader.cpp
+	"CSVReader.hpp"
+
+1454361052 c:\dev\csvreader\include\csvreader.hpp
+	<fstream>
+	<string>
+	<vector>
+	<iostream>
+	<map>
+	<sstream>
+	<algorithm>
+	<iterator>
+
+1454360004 source:c:\dev\csvreader\src\test.cpp
+	"CSVReader.hpp"
+

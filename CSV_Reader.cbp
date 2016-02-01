@@ -30,10 +30,12 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add directory="include" />
 		</Compiler>
 		<Unit filename="include/CSVReader.hpp" />
 		<Unit filename="src/CSVReader.cpp" />
+		<Unit filename="src/test.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
