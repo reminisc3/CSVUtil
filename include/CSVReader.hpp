@@ -31,15 +31,17 @@ class CSVReader
 
             if ( header )
             {
-                std::getline( m_infile, tmpLine );
+                std::getline( m_infile, tmpLine, '\n' );
                 store_header(tmpLine);
             }
 
+            int tr=0;
             while ( std::getline( m_infile, tmpLine, '\n' ) )
             {
-                //store lines in vector
                 m_row.push_back ( tmpLine );
+                tr++;
             }
+            m_column_total=tr;
 
             m_row_itr = m_row.begin();
             header_map_itr = header_map.begin();
@@ -53,42 +55,51 @@ class CSVReader
 
         const row_iterator& itr() { return m_row_itr; }
 
-        template <class t>
-        const t& operator[] ( int col )
+        const std::string& operator[] ( int col )
         {
-            cout << "test1";
             current_column=col;
-            return m_row[col];
+            parse_line_into_vec  ( m_row[current_row] );
+            return m_tmp_line[col];
         }
 
-        template <class t>
-        t operator[] ( int col )
-        {
-            cout << "test1";
-            current_column=col;
-            return m_row[col];
-        }
-
-        void operator++()
+        const row_iterator operator++(int)
         {
             current_row++;
             m_row_itr++;
+            row_iterator * ri = &m_row_itr;
+            return *ri;
         }
 
-        void operator--()
+        const row_iterator& operator++()
+        {
+            current_row++;
+            m_row_itr++;
+            return m_row_itr;
+        }
+
+        const row_iterator& operator--()
         {
             current_row--;
             m_row_itr--;
+            return m_row_itr;
+        }
+
+        const row_iterator operator--(int)
+        {
+            current_row--;
+            m_row_itr--;
+            row_iterator * ri = &m_row_itr;
+            return *ri;
         }
 
         const std::string& get_data( unsigned int col ) { return m_tmp_line[col]; }
 
-        const row_iterator& begin()
+        row_iterator begin()
         {
             return m_row.begin();
         }
 
-        const row_iterator& end()
+        row_iterator end()
         {
             return m_row.end();
         }
@@ -99,10 +110,14 @@ class CSVReader
 
         std::string get_header(int col);
 
-        std::vector<std::string> parse_line_into_vec (const std::string& str );
+        int get_column_total() { return m_column_total; }
+        int get_row_total() { return m_row_total; }
+
+
 
     private:
 
+        void parse_line_into_vec (const std::string& str );
         void store_header( const string& str );
         std::map<int,std::string> header_map;
         std::map<int,std::string>::iterator header_map_itr;
@@ -113,6 +128,8 @@ class CSVReader
         row_iterator m_row_itr;
         int current_row;
         int current_column;
+        int m_column_total;
+        int m_row_total;
         bool m_double_quotes;
 };
 
