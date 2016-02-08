@@ -34,7 +34,9 @@
 			<Add directory="include" />
 		</Compiler>
 		<Unit filename="include/CSVReader.hpp" />
+		<Unit filename="include/CSVWriter.hpp" />
 		<Unit filename="src/CSVReader.cpp" />
+		<Unit filename="src/CSVWriter.cpp" />
 		<Unit filename="src/test.cpp" />
 		<Extensions>
 			<code_completion />

@@ -18,9 +18,9 @@ class CSVReader
     public:
 
         typedef std::vector<std::string>::iterator row_iterator;
+        typedef std::map<int,std::string> csv_map;
 
-        CSVReader ( const string& filename, bool header=true ) : current_row(0),
-                                                                 m_double_quotes(false)
+        CSVReader ( const string& filename, bool header=true ) : current_row(0)
         {
 
             m_header=header;
@@ -41,16 +41,11 @@ class CSVReader
                 m_row.push_back ( tmpLine );
                 tr++;
             }
-            m_column_total=tr;
+            m_row_total=tr;
 
             m_row_itr = m_row.begin();
             header_map_itr = header_map.begin();
 
-        }
-
-        void set_double_quotes(bool flag)
-        {
-            m_double_quotes=true;
         }
 
         const row_iterator& itr() { return m_row_itr; }
@@ -59,6 +54,9 @@ class CSVReader
         {
             current_column=col;
             parse_line_into_vec  ( m_row[current_row] );
+            if ( col >= m_tmp_line.size() )
+                return "";
+
             return m_tmp_line[col];
         }
 
@@ -119,8 +117,9 @@ class CSVReader
 
         void parse_line_into_vec (const std::string& str );
         void store_header( const string& str );
-        std::map<int,std::string> header_map;
-        std::map<int,std::string>::iterator header_map_itr;
+
+        csv_map header_map;
+        csv_map::iterator header_map_itr;
         bool m_header;
         ifstream m_infile;
         std::vector<std::string> m_tmp_line;
@@ -130,7 +129,6 @@ class CSVReader
         int current_column;
         int m_column_total;
         int m_row_total;
-        bool m_double_quotes;
 };
 
 #endif // CSVREADER_H
