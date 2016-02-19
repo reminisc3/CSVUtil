@@ -110,8 +110,8 @@ class CSVReader
 
         int get_column_total() { return m_column_total; }
         int get_row_total() { return m_row_total; }
-
-
+        void set_row ( int row ) { current_row = row; }
+        csv_map get_header_map() { return header_map; }
 
     private:
 

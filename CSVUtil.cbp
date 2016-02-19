@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="CSV_Reader" />
+		<Option title="CSVUtil" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -34,6 +34,7 @@
 			<Add directory="include" />
 		</Compiler>
 		<Unit filename="include/CSVReader.hpp" />
+		<Unit filename="include/CSVUtil.hpp" />
 		<Unit filename="include/CSVWriter.hpp" />
 		<Unit filename="src/CSVReader.cpp" />
 		<Unit filename="src/CSVWriter.cpp" />
